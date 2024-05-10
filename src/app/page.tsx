@@ -1,6 +1,6 @@
-import { AddExpense } from '@/components/expense/add';
 import CategoryExpense from '@/components/expense/category';
 import DailyExpense from '@/components/expense/daily';
+import { Transactions } from '@/components/expense/transactions/transactions';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
             <DailyExpense className='flex-grow' />
             <CategoryExpense className='flex-grow' />
           </div>
-          <AddExpense />
+          <Transactions />
         </TabsContent>
 
         <TabsContent value="investments">Change your investments here.</TabsContent>

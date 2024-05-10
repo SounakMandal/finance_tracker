@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import Graph from './graph';
+import Graph from '../wrapper/graph/graph';
 
 interface DailyExpense {
   className?: string;
