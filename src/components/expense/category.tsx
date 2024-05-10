@@ -3,39 +3,23 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import Graph from '../wrapper/graph/graph';
+import { ExpenseCategory } from '@/interface/user';
 
 interface CategoryExpense {
+  expense: ExpenseCategory;
   className: string;
 }
 
-export default function CategoryExpense({ className }: CategoryExpense) {
-  const data = [
-    {
-      name: "Rent",
-      total: Math.floor(Math.random() * 5000) + 1000,
-    },
-    {
-      name: "Entertainment",
-      total: Math.floor(Math.random() * 5000) + 1000,
-    },
-    {
-      name: "Food",
-      total: Math.floor(Math.random() * 5000) + 1000,
-    },
-    {
-      name: "House",
-      total: Math.floor(Math.random() * 5000) + 1000,
-    },
-    {
-      name: "Drinks",
-      total: Math.floor(Math.random() * 5000) + 1000,
-    },
-    {
-      name: "EMI",
-      total: Math.floor(Math.random() * 5000) + 1000,
-    }
-  ];
-
+export default function CategoryExpense({ expense, className }: CategoryExpense) {
+  const needs = expense.needs;
+  const wants = expense.wants;
+  const data = Object.values(needs)
+    .map((item) => {
+      return {
+        name: item,
+        total: Math.floor(Math.random() * 5000) + 1000,
+      };
+    });
 
   return (
     <Card className={ className }>

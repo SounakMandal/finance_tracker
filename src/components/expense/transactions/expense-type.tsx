@@ -37,7 +37,7 @@ function ExpenseType() {
         <SelectItem value="food">Food</SelectItem>
         <SelectItem value="drinks">Drinks</SelectItem>
         <SelectItem value="gift">Gift</SelectItem>
-        <SelectItem value="Subscription">Subscription</SelectItem>
+        <SelectItem value="subscription">Subscription</SelectItem>
         <SelectItem value="travel">Travel</SelectItem>
         <SelectItem value="shopping">Shopping</SelectItem>
       </SelectGroup>

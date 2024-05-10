@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
@@ -26,6 +27,7 @@ export function AddExpense() {
   const form = useForm<TransactionFormData>({
     resolver: zodResolver(FormSchema),
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   function onSubmit(data: TransactionFormData) {
     toast({
@@ -39,7 +41,12 @@ export function AddExpense() {
   }
 
   return (
-    <Sheet>
+    <Sheet
+      open={ isOpen }
+      onOpenChange={ (newValue) => {
+        if (newValue) setIsOpen(true);
+        if (form.formState.isValid) setIsOpen(newValue);
+      } }>
       <SheetTrigger asChild>
         <Button variant="outline">
           Add an Expense
@@ -61,7 +68,7 @@ export function AddExpense() {
               <AmountFormField form={ form } />
               <TransactionDateFormField form={ form } />
               <SheetFooter>
-                <SheetClose asChild>
+                <SheetClose asChild aria-errormessage='Please correct all errors' onErrorCapture={ (event) => event.preventDefault }>
                   <Button type="submit">Save changes</Button>
                 </SheetClose>
               </SheetFooter>
