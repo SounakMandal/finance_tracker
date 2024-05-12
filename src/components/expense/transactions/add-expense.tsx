@@ -45,7 +45,10 @@ export function AddExpense() {
       open={ isOpen }
       onOpenChange={ (newValue) => {
         if (newValue) setIsOpen(true);
-        if (form.formState.isValid) setIsOpen(newValue);
+        if (form.formState.isDirty) {
+          if (form.formState.isValid) setIsOpen(false);
+          else setIsOpen(true);
+        }
       } }>
       <SheetTrigger asChild>
         <Button variant="outline">
@@ -68,9 +71,7 @@ export function AddExpense() {
               <AmountFormField form={ form } />
               <TransactionDateFormField form={ form } />
               <SheetFooter>
-                <SheetClose asChild aria-errormessage='Please correct all errors' onErrorCapture={ (event) => event.preventDefault }>
-                  <Button type="submit">Save changes</Button>
-                </SheetClose>
+                <SheetClose type='submit'>Save changes</SheetClose>
               </SheetFooter>
             </form>
           </Form>

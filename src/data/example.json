@@ -1,0 +1,57 @@
+{
+    "_id": { "$oid": "66404779c1087c5b05b5970b" },
+    "expense_types": {
+        "drinks": {
+            "category": "wants",
+            "aggregateType": "individual"
+        },
+        "food": {
+            "category": "wants",
+            "aggregateType": "individual"
+        },
+        "gift": {
+            "category": "wants",
+            "aggregateType": "individual"
+        },
+        "groceries": {
+            "category": "needs",
+            "aggregateType": "aggregate"
+        },
+        "hobby": {
+            "category": "wants",
+            "aggregateType": "individual"
+        },
+        "insurance": {
+            "category": "needs",
+            "aggregateType": "individual"
+        },
+        "loan": {
+            "category": "needs",
+            "aggregateType": "aggregate"
+        },
+        "rent": {
+            "category": "needs",
+            "aggregateType": "individual"
+        },
+        "shopping": {
+            "category": "wants",
+            "aggregateType": "aggregate"
+        },
+        "subscription": {
+            "category": "wants",
+            "aggregateType": "individual"
+        },
+        "transport": {
+            "category": "needs",
+            "aggregateType": "individual"
+        },
+        "travel": {
+            "category": "wants",
+            "aggregateType": "aggregate"
+        },
+        "utilities": {
+            "category": "needs",
+            "aggregateType": "aggregate"
+        }
+    }
+}

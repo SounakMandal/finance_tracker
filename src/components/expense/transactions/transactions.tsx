@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState } from 'react';
-import { Payment, columns } from '@/components/wrapper/table/columns';
+import { Payment, columns } from '@/components/expense/transactions/columns';
 import { DataTablePagination } from '@/components/wrapper/table/pagination';
 import { DataTable } from '@/components/wrapper/table/table';
 import { DataTableViewOptions } from '@/components/wrapper/table/view-options';
@@ -16,7 +16,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Input } from '../../ui/input';
-import { AddExpense } from './add';
+import { AddExpense } from './add-expense';
 
 function getData(): Payment[] {
   return [

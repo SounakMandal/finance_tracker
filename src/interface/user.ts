@@ -1,15 +1,15 @@
 import { ObjectId } from 'mongodb';
 
-interface ExpenseType {
-  [key: string]: string;
+interface ExpenseTypeDetails {
+  category: string,
+  aggregateType: "individual" | "aggregate",
 }
 
-export interface ExpenseCategory {
-  needs: ExpenseType;
-  wants: ExpenseType;
+export interface ExpenseType {
+  [key: string]: ExpenseTypeDetails;
 }
 
 export interface User {
   _id: ObjectId;
-  expense_types: ExpenseCategory;
+  expense_types: ExpenseType;
 }

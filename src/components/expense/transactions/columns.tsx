@@ -5,7 +5,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from 'lucide-react';
-import { DataTableColumnHeader } from './column-header';
+import { DataTableColumnHeader } from '../../wrapper/table/column-header';
 
 export type Payment = {
   id: string;
