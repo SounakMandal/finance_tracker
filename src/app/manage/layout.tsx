@@ -14,7 +14,7 @@ export default function ManageLayout({
     <main className="flex flex-1 flex-col gap-4 p-8 lg:gap-6">
       { children }
       <Toaster />
-      <Tabs defaultValue="expenses" className="w-full">
+      <Tabs defaultValue="settings" className="w-full">
         <TabsList>
           <TabsTrigger value="expenses">Expenses</TabsTrigger>
           <TabsTrigger value="investments">Investments</TabsTrigger>

@@ -1,4 +1,4 @@
-import { AddExpenseType } from '@/components/expense/settings/add-expense-type';
+import { AddExpenseType } from '@/components/expense/settings/add-type';
 import { ExpenseTypeTable } from '@/components/expense/settings/expense-table';
 import { getExpenseTableData } from '@/data/user';
 

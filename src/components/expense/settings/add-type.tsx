@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   SheetContent,
   SheetDescription,
@@ -9,25 +9,25 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@/components/ui/use-toast";
-import { FormSchema, TransactionFormData } from './schema';
-import { ExpenseTypeFormField } from './expense-type';
-import { TransactionAmountFormField } from './amount';
-import { TransactionDateFormField } from './transaction-date';
+import { updateUserDetails } from '@/data/user';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { FormProvider } from '@/components/wrapper/form/form';
+import { ExpenseTypeFormField } from './expense-type';
+import { ExpenseCategoryFormField } from './expense-category';
+import { AggregateTypeFormField } from './aggregate-type';
 import { FormContainer } from '@/components/wrapper/form/form-container';
-import { FormClose } from '@/components/wrapper/form/form-close';
 import { FormContainerProvider } from '@/components/wrapper/form/form-context';
+import { FormClose } from '@/components/wrapper/form/form-close';
+import { ExpenseTypeFormData, FormSchema } from './schema';
+import { toast } from '@/components/ui/use-toast';
 
-
-export function AddExpense() {
-  const form = useForm<TransactionFormData>({
+export function AddExpenseType() {
+  const form = useForm<ExpenseTypeFormData>({
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: TransactionFormData) {
+  function onSubmit(data: ExpenseTypeFormData) {
     const displayData = JSON.stringify(data, null, 2);
     toast({
       title: "You submitted the following values:",
@@ -41,26 +41,26 @@ export function AddExpense() {
 
   return (
     <FormContainerProvider>
-      <FormContainer form={ form } >
+      <FormContainer form={ form }>
         <SheetTrigger asChild>
           <Button variant="outline">
-            Add an Expense
+            Add a New Expense Type
           </Button>
         </SheetTrigger>
 
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Add an Expense</SheetTitle>
+            <SheetTitle>Add New Expense Type</SheetTitle>
             <SheetDescription>
-              Add details of your expense
+              Add details of your expense type
             </SheetDescription>
           </SheetHeader>
 
           <div className="grid gap-4 py-4">
             <FormProvider form={ form } onSubmit={ onSubmit } className="w-full space-y-6">
               <ExpenseTypeFormField />
-              <TransactionAmountFormField />
-              <TransactionDateFormField />
+              <ExpenseCategoryFormField />
+              <AggregateTypeFormField />
               <FormClose />
             </FormProvider>
           </div>
@@ -68,4 +68,4 @@ export function AddExpense() {
       </FormContainer >
     </FormContainerProvider>
   );
-};
+}
