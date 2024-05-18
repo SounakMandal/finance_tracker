@@ -1,32 +1,38 @@
-import { AmountInputProps, FormFieldProps } from './schema';
+import { AmountInputProps, TransactionFormData } from './schema';
 import { Input } from "@/components/ui/input";
 import {
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useFormContext, useFormState } from 'react-hook-form';
 
 function AmountInput({ field }: AmountInputProps) {
   return (
-    <Input
-      id="amount"
-      type='number'
-      defaultValue={ field.value }
-      onChange={ field.onChange } className="col-span-3" />
+    <FormControl>
+      <Input
+        type='number'
+        defaultValue={ field.value }
+        onChange={ field.onChange } className="col-span-3"
+      />
+    </FormControl>
   );
 }
 
-export function AmountFormField({ form }: FormFieldProps) {
+export function TransactionAmountFormField() {
+  const { isDirty } = useFormState<TransactionFormData>();
+  const { control } = useFormContext<TransactionFormData>();
   return (
     <FormField
-      control={ form.control }
+      control={ control }
       name="amount"
       render={ ({ field }) => (
         <FormItem>
           <FormLabel>Expense Amount</FormLabel>
           <AmountInput field={ field } />
-          <FormMessage />
+          { isDirty && <FormMessage /> }
         </FormItem>
       ) }
     />

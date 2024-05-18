@@ -15,7 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ExpenseTypeSelectProps, FormFieldProps } from './schema';
+import { ExpenseTypeSelectProps, TransactionFormData } from './schema';
+import { useFormContext, useFormState } from 'react-hook-form';
 
 function ExpenseType() {
   return (
@@ -58,10 +59,12 @@ function ExpenseTypeSelectInput({ field }: ExpenseTypeSelectProps) {
   );
 }
 
-export function ExpenseTypeFormField({ form }: FormFieldProps) {
+export function ExpenseTypeFormField() {
+  const { isDirty } = useFormState<TransactionFormData>();
+  const { control } = useFormContext<TransactionFormData>();
   return (
     <FormField
-      control={ form.control }
+      control={ control }
       name="category"
       render={ ({ field }) => (
         <FormItem>
@@ -70,7 +73,7 @@ export function ExpenseTypeFormField({ form }: FormFieldProps) {
           <FormDescription>
             You can manage your expense categories in
           </FormDescription>
-          <FormMessage />
+          { isDirty && <FormMessage /> }
         </FormItem>
       ) }
     />);

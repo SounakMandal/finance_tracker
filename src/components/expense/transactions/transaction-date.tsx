@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
-import { FormFieldProps, TransactionDatePickerProps } from './schema';
+import { TransactionDatePickerProps, TransactionFormData } from './schema';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { CalendarIcon } from 'lucide-react';
+import { useFormContext, useFormState } from 'react-hook-form';
 
 function TransactionDatePicker({ field }: TransactionDatePickerProps) {
   return (
@@ -53,16 +54,18 @@ function TransactionDatePicker({ field }: TransactionDatePickerProps) {
   );
 }
 
-export function TransactionDateFormField({ form }: FormFieldProps) {
+export function TransactionDateFormField() {
+  const { isDirty } = useFormState<TransactionFormData>();
+  const { control } = useFormContext<TransactionFormData>();
   return (
     <FormField
-      control={ form.control }
+      control={ control }
       name="transaction_date"
       render={ ({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>Transaction Date</FormLabel>
           <TransactionDatePicker field={ field } />
-          <FormMessage />
+          { isDirty && <FormMessage /> }
         </FormItem>
       ) }
     />

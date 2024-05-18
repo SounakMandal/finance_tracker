@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ControllerRenderProps, UseFormReturn } from 'react-hook-form';
+import { ControllerRenderProps } from 'react-hook-form';
 
 export const FormSchema = z.object({
   category: z
@@ -13,15 +13,10 @@ export const FormSchema = z.object({
   transaction_date: z
     .date({
       required_error: "A transaction date is required.",
-    })
-    .default(() => new Date()),
+    }),
 });
 
 export type TransactionFormData = z.infer<typeof FormSchema>;
-
-export interface FormFieldProps {
-  form: UseFormReturn<TransactionFormData, any, undefined>;
-}
 
 export interface TransactionDatePickerProps {
   field: ControllerRenderProps<TransactionFormData, "transaction_date">;

@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function ManageLayout({
@@ -12,6 +13,7 @@ export default function ManageLayout({
   return (
     <main className="flex flex-1 flex-col gap-4 p-8 lg:gap-6">
       { children }
+      <Toaster />
       <Tabs defaultValue="expenses" className="w-full">
         <TabsList>
           <TabsTrigger value="expenses">Expenses</TabsTrigger>
