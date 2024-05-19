@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/wrapper/table/column-header';
 import { ColumnDef } from '@tanstack/react-table';
-import { Trash2 } from 'lucide-react';
+import { ActionCell } from './action-cell';
 
 export type ExpenseType = {
+  name: string;
   category: string;
-  type: string;
+  aggregateType: string;
 };
 
 export const columns: ColumnDef<ExpenseType>[] = [
@@ -14,20 +14,15 @@ export const columns: ColumnDef<ExpenseType>[] = [
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Category" />,
   },
   {
-    accessorKey: "type",
+    accessorKey: "aggregateType",
+    header: ({ column }) => <DataTableColumnHeader column={ column } title="Aggregate Type" />,
+  },
+  {
+    accessorKey: "name",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Type" />,
   },
   {
-    id: "delete",
-    cell: ({ row }) => {
-      const rowData = row.original;
-      return (
-        <Button variant="secondary" onClick={ (event) => {
-          console.log(rowData);
-        } }>
-          Delete <Trash2 />
-        </Button>
-      );
-    }
-  }
+    id: "actions",
+    cell: ({ row }) => <ActionCell row={ row } />,
+  },
 ];

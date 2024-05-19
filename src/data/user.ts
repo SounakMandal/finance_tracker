@@ -2,16 +2,22 @@ import { ExpenseType, User } from '@/interface/user';
 import { ObjectId } from 'mongodb';
 import { client } from './connect';
 import { convertToTitleCase } from '@/utils/case';
+import document from "./example.json";
 
 const userId = '66404779c1087c5b05b5970b';
 
 export async function getUserExpenseCategories(): Promise<ExpenseType> {
-  const document = await client
-    .db("finance")
-    .collection("user")
-    .findOne<User>({ _id: new ObjectId(userId) });
-  if (document === null) throw Error("User was not found");
-  return document.expense_types;
+  try {
+    const document = await client
+      .db("finance")
+      .collection("user")
+      .findOne<User>({ _id: new ObjectId(userId) });
+    if (document === null) throw Error("User was not found");
+    return document.expense_types;
+  } catch (error) {
+    console.log("Unable to connect to client. Falling back to standards");
+    return document.expense_types as ExpenseType;
+  }
 }
 
 export async function getExpenseTableData() {
@@ -19,8 +25,9 @@ export async function getExpenseTableData() {
   return Object.entries(expenseTypes)
     .map(([category, type]) => {
       return {
-        category: convertToTitleCase(category),
-        type: convertToTitleCase(type.category)
+        name: convertToTitleCase(category),
+        category: convertToTitleCase(type.category),
+        aggregateType: convertToTitleCase(type.aggregateType)
       };
     });
 }

@@ -1,5 +1,7 @@
-import { AddExpenseType } from '@/components/expense/settings/add-type';
-import { ExpenseTypeTable } from '@/components/expense/settings/expense-table';
+import { AddExpenseType } from '@/components/expense/settings/form/add-type';
+import { ExpenseTypeTable } from '@/components/expense/settings/table/expense-table';
+import { Button } from '@/components/ui/button';
+import { SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { getExpenseTableData } from '@/data/user';
 
 export default async function SettingsManagement() {
@@ -7,7 +9,22 @@ export default async function SettingsManagement() {
   return (
     <div>
       <ExpenseTypeTable data={ data } />
-      <AddExpenseType />
+      <AddExpenseType
+        defaultValues={ {} }
+        trigger={
+          <SheetTrigger asChild>
+            <Button variant="outline">Add a New Expense Type</Button>
+          </SheetTrigger>
+        }
+        description={
+          <SheetHeader>
+            <SheetTitle>Add New Expense Type</SheetTitle>
+            <SheetDescription>
+              Add details of your expense type
+            </SheetDescription>
+          </SheetHeader>
+        }
+      />
     </div>
   );
 }

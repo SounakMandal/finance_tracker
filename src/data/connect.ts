@@ -23,7 +23,7 @@ export async function connectToDatabase(): Promise<Db> {
 
 export async function closeConnection(): Promise<void> {
   try {
-    // await client.close();
+    await client.close();
   } catch (error) {
     console.error('Error occurred:', error);
     throw error;

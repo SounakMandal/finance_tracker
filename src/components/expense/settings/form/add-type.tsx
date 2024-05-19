@@ -1,14 +1,6 @@
 "use client";
 
-import { Button } from '@/components/ui/button';
-import {
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
+import { SheetContent } from "@/components/ui/sheet";
 import { updateUserDetails } from '@/data/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -22,9 +14,16 @@ import { FormClose } from '@/components/wrapper/form/form-close';
 import { ExpenseTypeFormData, FormSchema } from './schema';
 import { toast } from '@/components/ui/use-toast';
 
-export function AddExpenseType() {
+interface ExpenseTypeProps {
+  trigger: JSX.Element;
+  description: JSX.Element;
+  defaultValues: Partial<ExpenseTypeFormData>;
+}
+
+export function AddExpenseType({ defaultValues, trigger, description }: ExpenseTypeProps) {
   const form = useForm<ExpenseTypeFormData>({
     resolver: zodResolver(FormSchema),
+    defaultValues
   });
 
   function onSubmit(data: ExpenseTypeFormData) {
@@ -42,19 +41,10 @@ export function AddExpenseType() {
   return (
     <FormContainerProvider>
       <FormContainer form={ form }>
-        <SheetTrigger asChild>
-          <Button variant="outline">
-            Add a New Expense Type
-          </Button>
-        </SheetTrigger>
+        { trigger }
 
         <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Add New Expense Type</SheetTitle>
-            <SheetDescription>
-              Add details of your expense type
-            </SheetDescription>
-          </SheetHeader>
+          { description }
 
           <div className="grid gap-4 py-4">
             <FormProvider form={ form } onSubmit={ onSubmit } className="w-full space-y-6">
