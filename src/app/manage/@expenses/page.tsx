@@ -1,6 +1,6 @@
 import DailyExpense from '@/components/expense/daily';
 import CategoryExpense from '@/components/expense/category';
-import { Transactions } from '@/components/expense/transactions/transactions';
+import { Transactions } from '@/components/expense/transactions/table/transactions-table';
 import { getExpenseAmountData } from '@/data/user';
 
 export default async function ExpenseManagement() {
