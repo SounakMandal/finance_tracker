@@ -2,7 +2,7 @@ import { AddExpenseType } from '@/components/expense/settings/form/add-type';
 import { ExpenseTypeTable } from '@/components/expense/settings/table/expense-table';
 import { Button } from '@/components/ui/button';
 import { SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { getExpenseTableData } from '@/data/user';
+import { getExpenseTableData } from '@/actions/user';
 
 export default async function SettingsManagement() {
   const data = await getExpenseTableData();

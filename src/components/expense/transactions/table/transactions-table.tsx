@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState } from 'react';
-import { columns } from '@/components/expense/transactions/table/columns';
+import { Expense, columns } from '@/components/expense/transactions/table/columns';
 import { DataTablePagination } from '@/components/wrapper/table/pagination';
 import { DataTable } from '@/components/wrapper/table/table';
 import { DataTableViewOptions } from '@/components/wrapper/table/view-options';
@@ -15,12 +15,20 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Input } from '../../../ui/input';
 import { AddExpense } from '../form/add-expense';
-import { getUserExpense } from '@/data/expense';
+import {
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
-export function Transactions() {
-  const data = getUserExpense();
+interface TransactionProps {
+  data: Expense[];
+}
+
+export function Transactions({ data }: TransactionProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   // const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -62,7 +70,24 @@ export function Transactions() {
         /> */}
         <div className='flex gap-1'>
           {/* <DataTableViewOptions table={ table } /> */ }
-          <AddExpense />
+          <AddExpense
+            defaultValues={ {} }
+            trigger={
+              <SheetTrigger asChild>
+                <Button variant="outline">
+                  Add an Expense
+                </Button>
+              </SheetTrigger>
+            }
+            description={
+              <SheetHeader>
+                <SheetTitle>Add an Expense</SheetTitle>
+                <SheetDescription>
+                  Add details of your expense
+                </SheetDescription>
+              </SheetHeader>
+            }
+          />
         </div>
       </div>
 

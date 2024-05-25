@@ -65,14 +65,12 @@ export function ExpenseTypeFormField() {
   return (
     <FormField
       control={ control }
-      name="category"
+      name="type"
       render={ ({ field }) => (
         <FormItem>
           <FormLabel>Expense Type</FormLabel>
           <ExpenseTypeSelectInput field={ field } />
-          <FormDescription>
-            You can manage your expense categories in
-          </FormDescription>
+          <FormDescription>You can manage your expense categories in</FormDescription>
           { isDirty && <FormMessage /> }
         </FormItem>
       ) }

@@ -1,19 +1,18 @@
 "use client";
 
-import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from 'lucide-react';
 import { DataTableColumnHeader } from '../../../wrapper/table/column-header';
+import { ActionCell } from './action-cell';
+import { ObjectId } from 'mongodb';
 
 export type Expense = {
-  id: string;
-  userId: string;
-  date: string;
-  expenseType: string;
-  description: string;
+  _id: string | ObjectId;
+  user_id: string;
+  date: Date;
+  type: string;
   amount: number;
+  description: string;
   tags: string[];
 };
 
@@ -43,14 +42,14 @@ export const columns: ColumnDef<Expense>[] = [
   {
     accessorKey: "date",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Transaction Date" />,
+    cell: ({ row }) => {
+      const date = new Date(row.getValue("date"));
+      return date.toDateString();
+    }
   },
   {
-    accessorKey: "expenseType",
+    accessorKey: "type",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Type" />,
-  },
-  {
-    accessorKey: "description",
-    header: ({ column }) => <DataTableColumnHeader column={ column } title="Description" />,
   },
   {
     accessorKey: "amount",
@@ -61,39 +60,19 @@ export const columns: ColumnDef<Expense>[] = [
         style: "currency",
         currency: "INR",
       }).format(amount);
-      return <div className="text-right font-medium">{ formatted }</div>;
+      return <div className="text-left font-medium">{ formatted }</div>;
     },
+  },
+  {
+    accessorKey: "description",
+    header: ({ column }) => <DataTableColumnHeader column={ column } title="Description" />,
   },
   {
     accessorKey: "tags",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Attached tags" />,
   },
-  // {
-  //   id: "actions",
-  //   cell: ({ row }) => {
-  //     const payment = row.original;
-
-  //     return (
-  //       <DropdownMenu>
-  //         <DropdownMenuTrigger asChild>
-  //           <Button variant="ghost" className="h-8 w-8 p-0">
-  //             <span className="sr-only">Open menu</span>
-  //             <MoreHorizontal className="h-4 w-4" />
-  //           </Button>
-  //         </DropdownMenuTrigger>
-  //         <DropdownMenuContent align="end">
-  //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-  //           <DropdownMenuItem
-  //             onClick={ () => navigator.clipboard.writeText(payment.id) }
-  //           >
-  //             Copy payment ID
-  //           </DropdownMenuItem>
-  //           <DropdownMenuSeparator />
-  //           <DropdownMenuItem>View customer</DropdownMenuItem>
-  //           <DropdownMenuItem>View payment details</DropdownMenuItem>
-  //         </DropdownMenuContent>
-  //       </DropdownMenu>
-  //     );
-  //   },
-  // },
+  {
+    id: "actions",
+    cell: ({ row }) => <ActionCell row={ row } />,
+  },
 ];

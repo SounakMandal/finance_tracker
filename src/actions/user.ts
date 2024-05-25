@@ -1,17 +1,16 @@
+"use server";
+
 import { ExpenseType, User } from '@/interface/user';
 import { ObjectId } from 'mongodb';
-import { client } from './connect';
+import { database, user_id } from '../data/connect';
 import { convertToTitleCase } from '@/utils/case';
-import document from "./example.json";
-
-const userId = '66404779c1087c5b05b5970b';
+import document from "../data/user_example.json";
 
 export async function getUserExpenseCategories(): Promise<ExpenseType> {
   try {
-    const document = await client
-      .db("finance")
+    const document = await database
       .collection("user")
-      .findOne<User>({ _id: new ObjectId(userId) });
+      .findOne<User>({ _id: new ObjectId(user_id) });
     if (document === null) throw Error("User was not found");
     return document.expense_types;
   } catch (error) {
@@ -44,11 +43,10 @@ export async function getExpenseAmountData() {
 }
 
 export async function updateUserDetails(updateDetails: object) {
-  const result = await client
-    .db("finance")
+  const result = await database
     .collection("user")
     .updateOne(
-      { _id: new ObjectId(userId) },
+      { _id: new ObjectId(user_id) },
       { $set: updateDetails }
     );
   if (result.modifiedCount === 0) throw Error("Invalid query");

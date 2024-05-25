@@ -1,7 +1,7 @@
 "use client";
 
 import { SheetContent } from "@/components/ui/sheet";
-import { updateUserDetails } from '@/data/user';
+import { updateUserDetails } from '@/actions/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { FormProvider } from '@/components/wrapper/form/form';

@@ -2,7 +2,7 @@ import { z } from "zod";
 import { ControllerRenderProps } from 'react-hook-form';
 
 export const FormSchema = z.object({
-  category: z
+  type: z
     .string({
       required_error: "Please select an expense category.",
     }),
@@ -14,6 +14,12 @@ export const FormSchema = z.object({
     .date({
       required_error: "A transaction date is required.",
     }),
+  description: z
+    .string()
+    .optional(),
+  tags: z
+    .array(z.string())
+    .optional()
 });
 
 export type TransactionFormData = z.infer<typeof FormSchema>;
@@ -27,5 +33,13 @@ export interface AmountInputProps {
 }
 
 export interface ExpenseTypeSelectProps {
-  field: ControllerRenderProps<TransactionFormData, "category">;
+  field: ControllerRenderProps<TransactionFormData, "type">;
+}
+
+export interface DescriptionTextAreaProps {
+  field: ControllerRenderProps<TransactionFormData, "description">;
+}
+
+export interface TagsBadgeProps {
+  field: ControllerRenderProps<TransactionFormData, "tags">;
 }

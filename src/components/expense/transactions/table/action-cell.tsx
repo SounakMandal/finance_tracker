@@ -1,38 +1,37 @@
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuTrigger
+  DropdownMenuItem
 } from '@/components/ui/dropdown-menu';
+import { Row } from '@tanstack/react-table';
+import { Expense } from './columns';
+import { DropdownTrigger } from '@/components/wrapper/dropdown/trigger';
+import { AddExpense } from '../form/add-expense';
+import { DropdownContainerProvider } from '@/components/wrapper/dropdown/dropdown-context';
+import { DropdownContainer } from '@/components/wrapper/dropdown/dropdown-container';
 import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet';
-import { Row } from '@tanstack/react-table';
-import { MoreHorizontal } from 'lucide-react';
-import { AddExpenseType } from '../form/add-type';
-import { ExpenseTypeFormData } from '../form/schema';
-import { DropdownContainerProvider } from '@/components/wrapper/dropdown/dropdown-context';
-import { DropdownContainer } from '@/components/wrapper/dropdown/dropdown-container';
-import { DropdownTrigger } from '@/components/wrapper/dropdown/trigger';
+import { Button } from '@/components/ui/button';
+import { TransactionFormData } from '../form/schema';
 
 interface ActionCellProps {
-  row: Row<ExpenseTypeFormData>;
+  row: Row<Expense>;
 }
 
 export function ActionCell({ row }: ActionCellProps) {
-  const rowData = row.original;
-  const defaultFormValues: Partial<ExpenseTypeFormData> = {
-    name: rowData.name,
-    category: rowData.category.toLowerCase(),
-    aggregateType: rowData.aggregateType.toLowerCase()
+  const expense = row.original;
+  const defaultFormValues: Partial<TransactionFormData> = {
+    type: expense.type,
+    amount: expense.amount,
+    transaction_date: expense.date
   };
 
   return (
-    <AddExpenseType
+    <AddExpense
       defaultValues={ defaultFormValues }
       trigger={
         <DropdownContainerProvider>
@@ -47,7 +46,7 @@ export function ActionCell({ row }: ActionCellProps) {
                 </SheetTrigger>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Button variant="ghost">Delete</Button>
+                <Button variant="ghost">Details</Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownContainer>
@@ -55,12 +54,11 @@ export function ActionCell({ row }: ActionCellProps) {
       }
       description={
         <SheetHeader>
-          <SheetTitle>Modify Expense Type</SheetTitle>
+          <SheetTitle>Modify Expense Details</SheetTitle>
           <SheetDescription>
-            Modify details of your expense type
+            Modify details of your expense
           </SheetDescription>
         </SheetHeader>
-      }
-    />
+      } />
   );
 }
