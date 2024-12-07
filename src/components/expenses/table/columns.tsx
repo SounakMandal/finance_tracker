@@ -2,10 +2,10 @@
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from '../../../wrapper/table/column-header';
+import { DataTableColumnHeader } from '@/components/wrapper/table/column-header';
 import { ActionCell } from './action-cell';
 import { TagsCell } from './tags-cell';
-import { Expense } from '@/interface/expense';
+import { type Expense } from '@/interface/expense';
 
 export const columns: ColumnDef<Expense>[] = [
   // {

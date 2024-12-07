@@ -1,7 +1,6 @@
 "use client";
 
 import { ChangeEvent, useState } from 'react';
-import { columns } from '@/components/expense/transactions/table/columns';
 import { DataTablePagination } from '@/components/wrapper/table/pagination';
 import { DataTable } from '@/components/wrapper/table/table';
 import { DataTableViewOptions } from '@/components/wrapper/table/view-options';
@@ -15,19 +14,17 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useUserExpense } from '@/hooks/useUserExpense';
 import { type Expense } from '@/interface/expense';
-import { TableControl } from './table-control';
+import { columns } from './columns';
 
-export function Transactions() {
-  const { data } = useUserExpense();
+export function TransactionsTable({ data }: { data: Expense[]; }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   // const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   // const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
-    data: data.expense,
+    data,
     columns,
     getRowId: (row: Expense) => row._id.toString(),
     getCoreRowModel: getCoreRowModel(),
@@ -54,7 +51,6 @@ export function Transactions() {
 
   return (
     <>
-      <TableControl />
       <DataTable columns={ columns } table={ table } />
       {/* <DataTablePagination table={ table } /> */ }
     </>

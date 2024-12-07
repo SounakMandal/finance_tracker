@@ -9,9 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { FileIcon } from './file-icon';
+import { UploadContent } from './upload-content';
+import { TransactionsTable } from '../table/transactions-table';
 
 interface UploadDialogProps {
   trigger: React.ReactNode;
@@ -30,14 +29,8 @@ export function UploadDialog({
           <DialogTitle>Upload File</DialogTitle>
           <DialogDescription>Upload a csv file to import all your expenses at once</DialogDescription>
         </DialogHeader>
-        <div className="border-2 border-dashed border-gray-200 rounded-lg flex flex-col gap-1 p-6 items-center">
-          <FileIcon className="w-12 h-12" />
-          <span className="text-sm font-medium text-gray-500">Drag and drop a file or click to browse</span>
-        </div>
-        <div className="space-y-2 text-sm">
-          <Label htmlFor="file" className="text-sm font-medium">File</Label>
-          <Input id="file" type="file" placeholder="File" accept="text/csv" />
-        </div>
+        <UploadContent />
+        {/* <TransactionsTable data={ [] } /> */}
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>{ close }</DialogClose>
         </DialogFooter>

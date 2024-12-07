@@ -1,7 +1,7 @@
-import DailyExpense from '@/components/expense/daily';
-import CategoryExpense from '@/components/expense/category';
-import { Transactions } from '@/components/expense/transactions/table/transactions-table';
+import DailyExpense from '@/components/expenses/daily';
+import CategoryExpense from '@/components/expenses/category';
 import { getExpenseAmountData } from '@/actions/user';
+import { Transactions } from '@/components/expenses/transactions';
 
 export default async function ExpenseManagement() {
   const expense = await getExpenseAmountData();
