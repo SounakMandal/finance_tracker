@@ -11,7 +11,7 @@ import { TransactionDateFormField } from './transaction-date';
 import { FormProvider, FormContainer, FormContainerProvider, FormClose } from '@/components/wrapper/form';
 import { TransactionDescriptionFormField } from './description';
 import { TagsFormField } from './tags';
-import { useUpsertUserExpense } from '@/hooks/useUpsertUserExpense';
+import { useExpenseMutation } from '@/hooks/useExpenseMutation';
 
 interface ExpenseProps {
   trigger: JSX.Element;
@@ -20,13 +20,17 @@ interface ExpenseProps {
   defaultValues: Partial<TransactionFormData>;
 }
 
-export function ExpenseForm(props: ExpenseProps) {
-  const { transactionId, defaultValues, trigger, description } = props;
+export function ExpenseForm({
+  transactionId,
+  defaultValues,
+  trigger,
+  description
+}: ExpenseProps) {
   const form = useForm<TransactionFormData>({
     resolver: zodResolver(FormSchema),
     defaultValues
   });
-  const { mutate } = useUpsertUserExpense();
+  const { mutate } = useExpenseMutation();
 
   async function onSubmit(data: TransactionFormData) {
     mutate({ transactionId, transaction: data });

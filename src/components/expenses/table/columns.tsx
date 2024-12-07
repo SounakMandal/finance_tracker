@@ -1,11 +1,9 @@
-"use client";
-
 import { Checkbox } from '@/components/ui/checkbox';
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from '../../../wrapper/table/column-header';
+import { DataTableColumnHeader } from '@/components/wrapper/table';
 import { ActionCell } from './action-cell';
 import { TagsCell } from './tags-cell';
-import { Expense } from '@/interface/expense';
+import { type Expense } from '@/interface/expense';
 
 export const columns: ColumnDef<Expense>[] = [
   // {
@@ -35,7 +33,11 @@ export const columns: ColumnDef<Expense>[] = [
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Transaction Date" />,
     cell: ({ row }) => {
       const date = new Date(row.getValue("date"));
-      return date.toLocaleDateString('en-IN');
+      return date.toLocaleDateString(navigator.language, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      });
     }
   },
   {

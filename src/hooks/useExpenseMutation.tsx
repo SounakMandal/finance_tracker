@@ -1,12 +1,12 @@
 import { randomBytes } from 'crypto';
 import { Updater, useMutation, useQueryClient } from "@tanstack/react-query";
 import { insertUserExpense, updateUserExpense } from '@/actions/expense';
-import { TransactionFormData } from '@/components/expense/transactions/form/schema';
+import { TransactionFormData } from '@/components/expenses/form/schema';
 import { ExpensesResponse } from '@/interface/expense';
 import { toast } from '@/hooks/use-toast';
 
 
-export const useUpsertUserExpense = () => {
+export const useExpenseMutation = () => {
   const queryClient = useQueryClient();
   const invalidationQueryKey = ["getUserExpense"];
   const temporaryTransactionId = randomBytes(20).toString();
