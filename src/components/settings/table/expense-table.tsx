@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable } from '@/components/wrapper/table/table';
+import { DataTable } from '@/components/wrapper/table';
 import { SortingState, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 import { ExpenseType, columns } from './columns';
 import { useState } from 'react';

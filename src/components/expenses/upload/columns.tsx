@@ -1,11 +1,20 @@
 "use client";
 
 import { Checkbox } from '@/components/ui/checkbox';
-import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from '../../../wrapper/table/column-header';
-import { ActionCell } from './action-cell';
-import { TagsCell } from './tags-cell';
-import { Expense } from '@/interface/expense';
+import { type ColumnDef, type RowData } from "@tanstack/react-table";
+import { DataTableColumnHeader } from '@/components/wrapper/table';
+import { TagsCell } from '../table/tags-cell';
+import { type Expense } from '@/interface/expense';
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Select, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ExpenseType } from '../form/expense-type';
+
+declare module '@tanstack/react-table' {
+  interface TableMeta<TData extends RowData> {
+    updateData: (rowIndex: number, columnId: string, value: unknown) => void;
+  }
+}
 
 export const columns: ColumnDef<Expense>[] = [
   // {
@@ -35,19 +44,38 @@ export const columns: ColumnDef<Expense>[] = [
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Transaction Date" />,
     cell: ({ row }) => {
       const date = new Date(row.getValue("date"));
-      return date.toLocaleDateString('en-IN');
+      return date.toLocaleDateString(navigator.language, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      });
     }
   },
   {
     accessorKey: "type",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Type" />,
+    cell: ({ getValue, row, column, table }) => {
+      const [value, setValue] = useState(getValue<string>());
+      return <Select
+        value={ value }
+        onValueChange={ value => setValue(value) }
+      >
+        <SelectTrigger>
+          <SelectValue
+            placeholder={ value }
+            onBlur={ () => table.options.meta?.updateData(row.index, column.id, value) }
+          />
+        </SelectTrigger>
+        <ExpenseType />
+      </Select>;
+    }
   },
   {
     accessorKey: "amount",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Amount" />,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
+      const formatted = new Intl.NumberFormat(navigator.language, {
         style: "currency",
         currency: "INR",
       }).format(amount);
@@ -57,14 +85,20 @@ export const columns: ColumnDef<Expense>[] = [
   {
     accessorKey: "description",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Description" />,
+    cell: ({ getValue, row, column, table }) => {
+      const [value, setValue] = useState(getValue<string>());
+      return <Input
+        value={ value }
+        placeholder={ value }
+        onChange={ event => setValue(event.target.value) }
+        onBlur={ () => table.options.meta?.updateData(row.index, column.id, value) }
+        className='bg-transparent border-0'
+      />;
+    }
   },
   {
     accessorKey: "tags",
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Attached tags" />,
     cell: ({ row }) => <TagsCell row={ row } />,
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => <ActionCell row={ row } />,
   },
 ];

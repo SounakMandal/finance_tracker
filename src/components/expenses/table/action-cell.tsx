@@ -6,7 +6,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Row } from '@tanstack/react-table';
 import { DropdownTrigger, DropdownContainer, DropdownContainerProvider } from '@/components/wrapper/dropdown';
-import { ExpenseForm } from '../form/expense-form';
 import {
   SheetDescription,
   SheetHeader,
@@ -14,6 +13,7 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import { ExpenseForm } from '../form/expense-form';
 import { TransactionFormData } from '../form/schema';
 import { Pencil, Trash2 } from 'lucide-react';
 import { Expense } from '@/interface/expense';
@@ -34,7 +34,7 @@ export function ActionCell({ row }: ActionCellProps) {
 
   return (
     <ExpenseForm
-      transactionId={ row.id }
+      transactionId={ expense._id.toString() }
       defaultValues={ defaultFormValues }
       trigger={
         <DropdownContainerProvider>

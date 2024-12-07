@@ -18,7 +18,7 @@ import {
 import { ExpenseTypeSelectProps, TransactionFormData } from './schema';
 import { useFormContext, useFormState } from 'react-hook-form';
 
-function ExpenseType() {
+export function ExpenseType() {
   return (
     <SelectContent>
       <SelectGroup>
