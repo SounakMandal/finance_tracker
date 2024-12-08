@@ -1,7 +1,6 @@
 "use client";
 
 import { ChangeEvent, useState } from 'react';
-import { columns } from '@/components/expense/transactions/table/columns';
 import { DataTablePagination } from '@/components/wrapper/table/pagination';
 import { DataTable } from '@/components/wrapper/table/table';
 import { DataTableViewOptions } from '@/components/wrapper/table/view-options';
@@ -15,26 +14,17 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ExpenseForm } from '../form/expense-form';
-import {
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { useUserExpense } from '@/hooks/useUserExpense';
 import { type Expense } from '@/interface/expense';
+import { columns } from './columns';
 
-export function Transactions() {
-  const { data } = useUserExpense();
+export function TransactionsTable({ data }: { data: Expense[]; }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   // const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   // const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
-    data: data.expense,
+    data,
     columns,
     getRowId: (row: Expense) => row._id.toString(),
     getCoreRowModel: getCoreRowModel(),
@@ -61,35 +51,7 @@ export function Transactions() {
 
   return (
     <>
-      <div className="flex items-center justify-between py-4">
-        {/* <Input
-          placeholder="Filter emails..."
-          value={ (table.getColumn("email")?.getFilterValue() as string) ?? "" }
-          onChange={ handleFilterChange }
-          className="max-w-sm"
-        /> */}
-        <div className='flex gap-1'>
-          {/* <DataTableViewOptions table={ table } /> */ }
-          <ExpenseForm
-            defaultValues={ {} }
-            trigger={
-              <SheetTrigger asChild>
-                <Button variant="outline">Add Expense</Button>
-              </SheetTrigger>
-            }
-            description={
-              <SheetHeader>
-                <SheetTitle>Add Expense</SheetTitle>
-                <SheetDescription>Add details of your expense</SheetDescription>
-              </SheetHeader>
-            }
-          />
-          <Button variant="outline">Upload Expenses</Button>
-        </div>
-      </div>
-
       <DataTable columns={ columns } table={ table } />
-
       {/* <DataTablePagination table={ table } /> */ }
     </>
   );

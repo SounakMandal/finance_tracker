@@ -1,5 +1,5 @@
-import { ExpenseTypeForm } from '@/components/expense/settings/form/expense-type-form';
-import { ExpenseTypeTable } from '@/components/expense/settings/table/expense-table';
+import { ExpenseTypeForm } from '@/components/settings/form/expense-type-form';
+import { ExpenseTypeTable } from '@/components/settings/table/expense-table';
 import { Button } from '@/components/ui/button';
 import { SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { getExpenseTableData } from '@/actions/user';

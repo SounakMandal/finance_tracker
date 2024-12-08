@@ -1,7 +1,7 @@
 "use server";
 
 import { database, user_id } from '../data/connect';
-import { TransactionFormData } from '@/components/expense/transactions/form/schema';
+import { TransactionFormData } from '@/components/expenses/form/schema';
 import { Expense, ExpensesResponse } from '@/interface/expense';
 import { ObjectId } from 'mongodb';
 
