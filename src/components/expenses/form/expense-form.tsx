@@ -20,8 +20,12 @@ interface ExpenseProps {
   defaultValues: Partial<TransactionFormData>;
 }
 
-export function ExpenseForm(props: ExpenseProps) {
-  const { transactionId, defaultValues, trigger, description } = props;
+export function ExpenseForm({
+  transactionId,
+  defaultValues,
+  trigger,
+  description
+}: ExpenseProps) {
   const form = useForm<TransactionFormData>({
     resolver: zodResolver(FormSchema),
     defaultValues
