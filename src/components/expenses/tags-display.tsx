@@ -9,24 +9,24 @@ interface TagsDisplayAreaProps {
 }
 
 export function TagsDisplayArea({ tags, onChange }: TagsDisplayAreaProps) {
-  const [pendingDataPoint, setPendingDataPoint] = useState("");
+  const [pendingDataPoint, setPendingDataPoint] = useState('');
 
   useEffect(() => {
-    if (pendingDataPoint.includes(",")) {
+    if (pendingDataPoint.includes(',')) {
       const newDataPoints = new Set([
         ...tags ?? [],
-        ...pendingDataPoint.split(",").map((chunk) => chunk.trim()),
+        ...pendingDataPoint.split(',').map((chunk) => chunk.trim()),
       ]);
       onChange(Array.from(newDataPoints));
-      setPendingDataPoint("");
+      setPendingDataPoint('');
     }
-  }, [pendingDataPoint, tags]);
+  }, [pendingDataPoint, onChange, tags]);
 
   const addPendingDataPoint = () => {
     if (pendingDataPoint) {
       const newDataPoints = new Set([...tags ?? [], pendingDataPoint]);
       onChange(Array.from(newDataPoints));
-      setPendingDataPoint("");
+      setPendingDataPoint('');
     }
   };
 
@@ -56,10 +56,10 @@ export function TagsDisplayArea({ tags, onChange }: TagsDisplayAreaProps) {
         value={ pendingDataPoint }
         onChange={ (event) => setPendingDataPoint(event.target.value) }
         onKeyDown={ (event) => {
-          if (event.key === "Enter" || event.key === ",") {
+          if (event.key === 'Enter' || event.key === ',') {
             event.preventDefault();
             addPendingDataPoint();
-          } else if (event.key === "Backspace" && pendingDataPoint.length === 0 && tags?.length) {
+          } else if (event.key === 'Backspace' && pendingDataPoint.length === 0 && tags?.length) {
             event.preventDefault();
             onChange(tags?.slice(0, -1));
           }

@@ -1,9 +1,8 @@
-import { Checkbox } from '@/components/ui/checkbox';
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from '@/components/wrapper/table';
+import { type Expense } from '@/interface/expense';
 import { ActionCell } from './action-cell';
 import { TagsCell } from './tags-cell';
-import { type Expense } from '@/interface/expense';
 
 export const columns: ColumnDef<Expense>[] = [
   // {
@@ -29,44 +28,44 @@ export const columns: ColumnDef<Expense>[] = [
   //   enableHiding: false,
   // },
   {
-    accessorKey: "date",
+    accessorKey: 'date',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Transaction Date" />,
     cell: ({ row }) => {
-      const date = new Date(row.getValue("date"));
+      const date = new Date(row.getValue('date'));
       return date.toLocaleDateString(navigator.language, {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
       });
-    }
+    },
   },
   {
-    accessorKey: "type",
+    accessorKey: 'type',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Type" />,
   },
   {
-    accessorKey: "amount",
+    accessorKey: 'amount',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Amount" />,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "INR",
+      const amount = parseFloat(row.getValue('amount'));
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'INR',
       }).format(amount);
       return <div className="text-left font-medium">{ formatted }</div>;
     },
   },
   {
-    accessorKey: "description",
+    accessorKey: 'description',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Description" />,
   },
   {
-    accessorKey: "tags",
+    accessorKey: 'tags',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Attached tags" />,
     cell: ({ row }) => <TagsCell row={ row } />,
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <ActionCell row={ row } />,
   },
 ];

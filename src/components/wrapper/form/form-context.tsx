@@ -1,6 +1,6 @@
 import { Dispatch, MutableRefObject, PropsWithChildren, SetStateAction, createContext, useContext, useRef, useState } from 'react';
 
-type CloseButtonTypes = "save" | "close";;
+type CloseButtonTypes = 'save' | 'close';;
 interface FormCloseContextValues {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -23,7 +23,7 @@ export function FormContainerProvider({ children }: PropsWithChildren) {
   return (
     <FormCloseContext.Provider value={ {
       isOpen, setIsOpen,
-      closeButton
+      closeButton,
     } }>
       { children }
     </FormCloseContext.Provider>

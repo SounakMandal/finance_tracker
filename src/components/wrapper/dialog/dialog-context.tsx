@@ -19,7 +19,7 @@ export function useDialog<T>(): DialogContextValues<T> {
   return context;
 }
 
-type DialogProviderProps<T> = Omit<DialogContextValues<T>, "step" | "setStep" | "data" | "setData">;
+type DialogProviderProps<T> = Omit<DialogContextValues<T>, 'step' | 'setStep' | 'data' | 'setData'>;
 
 export function DialogContainerProvider<T>({ trigger, close, children }: PropsWithChildren<DialogProviderProps<T>>) {
   const [step, setStep] = useState(0);

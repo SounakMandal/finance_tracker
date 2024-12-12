@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { ExpenseTypeForm } from '@/components/settings/form/expense-type-form';
 import { ExpenseTypeTable } from '@/components/settings/table/expense-table';
@@ -9,13 +9,13 @@ import { convertToTitleCase } from '@/utils/case';
 
 export default function SettingsManagement() {
   const { data } = useUserQuery(
-    expenseTypes => Object.entries(expenseTypes).map(([category, type]) => {
-      return {
-        name: convertToTitleCase(category),
-        category: convertToTitleCase(type.category),
-        aggregateType: convertToTitleCase(type.aggregateType)
-      };
-    })
+      (expenseTypes) => Object.entries(expenseTypes).map(([category, type]) => {
+        return {
+          name: convertToTitleCase(category),
+          category: convertToTitleCase(type.category),
+          aggregateType: convertToTitleCase(type.aggregateType),
+        };
+      })
   );
   return (
     <div>

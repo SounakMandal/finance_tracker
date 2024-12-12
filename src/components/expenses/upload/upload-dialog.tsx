@@ -8,16 +8,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { UploadContent } from './upload-content';
-import { TransactionsTable } from '../table/transactions-table';
 import { useDialog } from '@/components/wrapper/dialog/dialog-context';
 import { parseCSV, readFile } from '@/utils/file';
 import { toast } from '@/hooks/use-toast';
 import { Expense } from '@/interface/expense';
-import { columns } from './columns';
 import { useSkipper } from '@/hooks/useSkipper';
+import { columns } from './columns';
+import { UploadContent } from './upload-content';
+import { TransactionsTable } from '../table/transactions-table';
 
 function UploadStep() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -32,15 +32,16 @@ function UploadStep() {
           const content = await readFile(file);
           setData(parseCSV(content));
         } catch (error) {
+          console.error(error);
           toast({
-            title: "Failure",
-            variant: "destructive",
-            description: "Failed to read file contents"
+            title: 'Failure',
+            variant: 'destructive',
+            description: 'Failed to read file contents',
           });
         }
       }
     }
-    setStep(step => step + 1);
+    setStep((step) => step + 1);
   };
 
   return (
@@ -76,7 +77,7 @@ function ReviewStep() {
         meta={ {
           updateData: (rowIndex: number, columnId: any, value: any) => {
             skipAutoResetPageIndex();
-            setData(old => old.map((row, index) => {
+            setData((old) => old.map((row, index) => {
               if (index === rowIndex) {
                 return {
                   ...old[rowIndex]!,
@@ -85,12 +86,12 @@ function ReviewStep() {
               }
               return row;
             }));
-          }
+          },
         } }
         autoResetPageIndex={ autoResetPageIndex }
       />
       <DialogFooter className="sm:justify-start">
-        <Button onClick={ () => setStep(step => step - 1) }>Previous</Button>
+        <Button onClick={ () => setStep((step) => step - 1) }>Previous</Button>
         <DialogClose onClick={ () => setStep(0) } asChild>{ close }</DialogClose>
       </DialogFooter>
     </DialogContent>

@@ -1,6 +1,6 @@
-import { Sheet } from '@/components/ui/sheet';
 import { PropsWithChildren } from 'react';
 import { FieldValues, UseFormReturn } from 'react-hook-form';
+import { Sheet } from '@/components/ui/sheet';
 import { useFormClose } from './form-context';
 
 interface FormContainerProps<T extends FieldValues> extends PropsWithChildren {
@@ -20,7 +20,7 @@ export function FormContainer<T extends FieldValues>({ form, children }: FormCon
         // Form will not be submitted
         // Form is not dirty
         // Form is dirty but passes validation
-        if (closeButton.current === "close") {
+        if (closeButton.current === 'close') {
           form.reset();
           setIsOpen(newValue);
         } else {

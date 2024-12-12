@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useExpenseQuery } from '@/hooks/useExpenseQuery';
 import { TransactionsTable } from './table/transactions-table';

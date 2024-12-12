@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
-import { DescriptionTextAreaProps, TransactionFormData } from './schema';
 import { FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
+import { DescriptionTextAreaProps, TransactionFormData } from './schema';
 
 function DescriptionTextArea({ field }: DescriptionTextAreaProps) {
   return (

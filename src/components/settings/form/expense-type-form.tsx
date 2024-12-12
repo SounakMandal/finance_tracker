@@ -1,16 +1,15 @@
-"use client";
+'use client';
 
 import { JSX } from 'react';
-import { SheetContent } from "@/components/ui/sheet";
-import { updateUserDetails } from '@/actions/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { SheetContent } from '@/components/ui/sheet';
 import { FormProvider, FormContainer, FormContainerProvider, FormClose } from '@/components/wrapper/form';
+import { toast } from '@/hooks/use-toast';
 import { ExpenseTypeFormField } from './expense-type';
 import { ExpenseCategoryFormField } from './expense-category';
 import { AggregateTypeFormField } from './aggregate-type';
 import { ExpenseTypeFormData, FormSchema } from './schema';
-import { toast } from '@/hooks/use-toast';
 
 interface ExpenseTypeProps {
   trigger: JSX.Element;
@@ -21,13 +20,13 @@ interface ExpenseTypeProps {
 export function ExpenseTypeForm({ defaultValues, trigger, description }: ExpenseTypeProps) {
   const form = useForm<ExpenseTypeFormData>({
     resolver: zodResolver(FormSchema),
-    defaultValues
+    defaultValues,
   });
 
   function onSubmit(data: ExpenseTypeFormData) {
     const displayData = JSON.stringify(data, null, 2);
     toast({
-      title: "You submitted the following values:",
+      title: 'You submitted the following values:',
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{ displayData }</code>

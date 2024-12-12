@@ -16,7 +16,7 @@ let client = new MongoClient(uri, {
 async function connectToDatabase(): Promise<Db> {
   try {
     client = await client.connect();
-    return client.db("finance");
+    return client.db('finance');
   } catch (error) {
     console.error('Error occurred:', error);
     throw error;

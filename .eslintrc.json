@@ -10,6 +10,8 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "max-len": "off",
+    "camelcase": "off",
     "valid-jsdoc": "off",
     "require-jsdoc": "off",
     "object-curly-spacing": [

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Cell,
@@ -7,7 +7,8 @@ import {
   HeaderGroup,
   Row,
   flexRender,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
+import { Table as TableType } from '@tanstack/table-core';
 import {
   Table,
   TableBody,
@@ -15,8 +16,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Table as TableType } from '@tanstack/table-core';
+} from '@/components/ui/table';
 import { Each } from '@/components/utils/map';
 
 interface DataTableProps<TData, TValue> {
@@ -27,11 +27,11 @@ interface DataTableProps<TData, TValue> {
 function renderTableHead<TData>(header: Header<TData, unknown>) {
   return (
     <TableHead key={ header.id }>
-      { header.isPlaceholder
-        ? null
-        : flexRender(
-          header.column.columnDef.header,
-          header.getContext()
+      { header.isPlaceholder ?
+        null :
+        flexRender(
+            header.column.columnDef.header,
+            header.getContext()
         ) }
     </TableHead>
   );
@@ -58,7 +58,7 @@ function renderTableCell<TData>(cell: Cell<TData, unknown>) {
 
 function renderTableBody<TData>(row: Row<TData>) {
   return (
-    <TableRow key={ row.id } data-state={ row.getIsSelected() && "selected" }>
+    <TableRow key={ row.id } data-state={ row.getIsSelected() && 'selected' }>
       <Each
         data={ row.getVisibleCells() }
         mapper={ renderTableCell }

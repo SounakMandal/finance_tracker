@@ -1,19 +1,16 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useState } from 'react';
-import { DataTable, DataTablePagination } from '@/components/wrapper/table';
+import { useState } from 'react';
 import {
   type ColumnDef,
-  ColumnFiltersState,
   SortingState,
   type TableOptions,
-  VisibilityState,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
+import { DataTable, DataTablePagination } from '@/components/wrapper/table';
 import { type Expense } from '@/interface/expense';
 
 interface TransactionsTableProps extends Partial<Omit<TableOptions<Expense>, 'data' | 'columns'>> {
@@ -46,12 +43,6 @@ export function TransactionsTable({ data, columns, ...rest }: TransactionsTableP
     },
     ...rest,
   });
-
-  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("Filtering email");
-    table.getColumn("email")?.setFilterValue(event.target.value);
-    console.log("Email filtered successfully");
-  };
 
   return (
     <>
