@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 
 export interface ExpenseType {
-  category: string,
+  category: "needs" | "wants",
   aggregateType: "individual" | "aggregate",
 }
 

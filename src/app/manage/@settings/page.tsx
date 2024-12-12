@@ -1,11 +1,22 @@
-import { ExpenseTypeForm } from '@/components/expense/settings/form/expense-type-form';
-import { ExpenseTypeTable } from '@/components/expense/settings/table/expense-table';
+"use client";
+
+import { ExpenseTypeForm } from '@/components/settings/form/expense-type-form';
+import { ExpenseTypeTable } from '@/components/settings/table/expense-table';
 import { Button } from '@/components/ui/button';
 import { SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { getExpenseTableData } from '@/actions/user';
+import { useUserQuery } from '@/hooks/useUserQuery';
+import { convertToTitleCase } from '@/utils/case';
 
-export default async function SettingsManagement() {
-  const data = await getExpenseTableData();
+export default function SettingsManagement() {
+  const { data } = useUserQuery(
+    expenseTypes => Object.entries(expenseTypes).map(([category, type]) => {
+      return {
+        name: convertToTitleCase(category),
+        category: convertToTitleCase(type.category),
+        aggregateType: convertToTitleCase(type.aggregateType)
+      };
+    })
+  );
   return (
     <div>
       <ExpenseTypeForm
@@ -22,7 +33,7 @@ export default async function SettingsManagement() {
           </SheetHeader>
         }
       />
-      <ExpenseTypeTable data={ data } />
+      <ExpenseTypeTable data={ data ?? [] } />
     </div>
   );
 }

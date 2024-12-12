@@ -1,4 +1,4 @@
-import { DataTableColumnHeader } from '@/components/wrapper/table/column-header';
+import { DataTableColumnHeader } from '@/components/wrapper/table';
 import { ColumnDef } from '@tanstack/react-table';
 import { ActionCell } from './action-cell';
 

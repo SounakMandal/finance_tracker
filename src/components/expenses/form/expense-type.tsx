@@ -8,43 +8,12 @@ import {
 } from "@/components/ui/form";
 import {
   Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { ExpenseTypeSelectProps, TransactionFormData } from './schema';
 import { useFormContext, useFormState } from 'react-hook-form';
-
-function ExpenseType() {
-  return (
-    <SelectContent>
-      <SelectGroup>
-        <SelectLabel>Needs</SelectLabel>
-        <SelectItem value="rent">Rent</SelectItem>
-        <SelectItem value="mortgage">Mortgage</SelectItem>
-        <SelectItem value="insurance">Insurance</SelectItem>
-        <SelectItem value="groceries">Groceries</SelectItem>
-        <SelectItem value="utilities">Utilities</SelectItem>
-        <SelectItem value="loan">Loan Repayments</SelectItem>
-        <SelectItem value="transport">Transport</SelectItem>
-      </SelectGroup>
-
-      <SelectGroup>
-        <SelectLabel>Wants</SelectLabel>
-        <SelectItem value="hobby">Hobby</SelectItem>
-        <SelectItem value="food">Food</SelectItem>
-        <SelectItem value="drinks">Drinks</SelectItem>
-        <SelectItem value="gift">Gift</SelectItem>
-        <SelectItem value="subscription">Subscription</SelectItem>
-        <SelectItem value="travel">Travel</SelectItem>
-        <SelectItem value="shopping">Shopping</SelectItem>
-      </SelectGroup>
-    </SelectContent>
-  );
-}
+import { ExpenseType } from '../expense-type';
 
 function ExpenseTypeSelectInput({ field }: ExpenseTypeSelectProps) {
   return (

@@ -1,12 +1,38 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "next",
+    "google",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
+  ],
   "plugins": [
-    "@tanstack/query"
+    "@tanstack/query",
+    "@typescript-eslint"
   ],
   "rules": {
-    "@tanstack/query/exhaustive-deps": "error",
-    "@tanstack/query/no-deprecated-options": "error",
-    "@tanstack/query/prefer-query-object-syntax": "error",
-    "@tanstack/query/stable-query-client": "error"
-  }
+    "valid-jsdoc": "off",
+    "require-jsdoc": "off",
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "import/order": [
+      1,
+      {
+        "groups": [
+          "external",
+          "builtin",
+          "internal",
+          "sibling",
+          "parent",
+          "index"
+        ]
+      }
+    ]
+  },
+  "ignorePatterns": [
+    "src/components/ui/**/*",
+    "src/hooks/use-toast.ts",
+    "src/lib/**/*"
+  ]
 }
