@@ -1,5 +1,5 @@
-import { DataTableColumnHeader } from '@/components/wrapper/table';
 import { ColumnDef } from '@tanstack/react-table';
+import { DataTableColumnHeader } from '@/components/wrapper/table';
 import { ActionCell } from './action-cell';
 
 export type ExpenseType = {
@@ -10,19 +10,19 @@ export type ExpenseType = {
 
 export const columns: ColumnDef<ExpenseType>[] = [
   {
-    accessorKey: "category",
+    accessorKey: 'category',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Category" />,
   },
   {
-    accessorKey: "aggregateType",
+    accessorKey: 'aggregateType',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Aggregate Type" />,
   },
   {
-    accessorKey: "name",
+    accessorKey: 'name',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Type" />,
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <ActionCell row={ row } />,
   },
 ];

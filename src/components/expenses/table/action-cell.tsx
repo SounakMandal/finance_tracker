@@ -1,22 +1,22 @@
+import { Row } from '@tanstack/react-table';
+import { Pencil, Trash2 } from 'lucide-react';
 import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuItem,
-  DropdownMenuSeparator
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { Row } from '@tanstack/react-table';
 import { DropdownTrigger, DropdownContainer, DropdownContainerProvider } from '@/components/wrapper/dropdown';
 import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger
+  SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import { Expense } from '@/interface/expense';
 import { ExpenseForm } from '../form/expense-form';
 import { TransactionFormData } from '../form/schema';
-import { Pencil, Trash2 } from 'lucide-react';
-import { Expense } from '@/interface/expense';
 
 interface ActionCellProps {
   row: Row<Expense>;
@@ -29,7 +29,7 @@ export function ActionCell({ row }: ActionCellProps) {
     amount: expense.amount,
     date: expense.date,
     description: expense.description,
-    tags: expense.tags
+    tags: expense.tags,
   };
 
   return (

@@ -1,5 +1,5 @@
-import { DropdownMenu } from '@/components/ui/dropdown-menu';
 import { PropsWithChildren } from 'react';
+import { DropdownMenu } from '@/components/ui/dropdown-menu';
 import { useDropdown } from './dropdown-context';
 
 export function DropdownContainer({ children }: PropsWithChildren) {

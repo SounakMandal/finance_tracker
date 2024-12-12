@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
@@ -11,51 +11,51 @@ interface DailyExpense {
 export default function DailyExpense({ className }: DailyExpense) {
   const data = [
     {
-      name: "Jan",
+      name: 'Jan',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Feb",
+      name: 'Feb',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Mar",
+      name: 'Mar',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Apr",
+      name: 'Apr',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "May",
+      name: 'May',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Jun",
+      name: 'Jun',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Jul",
+      name: 'Jul',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Aug",
+      name: 'Aug',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Sep",
+      name: 'Sep',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Oct",
+      name: 'Oct',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Nov",
+      name: 'Nov',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: "Dec",
+      name: 'Dec',
       total: Math.floor(Math.random() * 5000) + 1000,
     },
   ];

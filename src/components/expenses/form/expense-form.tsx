@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
 import { JSX } from 'react';
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SheetContent } from "@/components/ui/sheet";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SheetContent } from '@/components/ui/sheet';
+import { FormProvider, FormContainer, FormContainerProvider, FormClose } from '@/components/wrapper/form';
+import { useExpenseMutation } from '@/hooks/useExpenseMutation';
 import { FormSchema, TransactionFormData } from './schema';
 import { ExpenseTypeFormField } from './expense-type';
 import { TransactionAmountFormField } from './amount';
 import { TransactionDateFormField } from './transaction-date';
-import { FormProvider, FormContainer, FormContainerProvider, FormClose } from '@/components/wrapper/form';
 import { TransactionDescriptionFormField } from './description';
 import { TagsFormField } from './tags';
-import { useExpenseMutation } from '@/hooks/useExpenseMutation';
 
 interface ExpenseProps {
   trigger: JSX.Element;
@@ -24,11 +24,11 @@ export function ExpenseForm({
   transactionId,
   defaultValues,
   trigger,
-  description
+  description,
 }: ExpenseProps) {
   const form = useForm<TransactionFormData>({
     resolver: zodResolver(FormSchema),
-    defaultValues
+    defaultValues,
   });
   const { mutate } = useExpenseMutation();
 

@@ -1,3 +1,4 @@
+import { useFormContext, useFormState } from 'react-hook-form';
 import {
   FormControl,
   FormDescription,
@@ -5,10 +6,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { useFormContext, useFormState } from 'react-hook-form';
-import { ExpenseNameInputProps, ExpenseTypeFormData } from './schema';
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { ExpenseNameInputProps, ExpenseTypeFormData } from './schema';
 
 function ExpenseTypeNameInput({ field }: ExpenseNameInputProps) {
   return (
@@ -17,7 +17,7 @@ function ExpenseTypeNameInput({ field }: ExpenseNameInputProps) {
         type='string'
         className="col-span-3"
         defaultValue={ field.value }
-        onChange={ field.onChange } 
+        onChange={ field.onChange }
       />
     </FormControl>
   );

@@ -1,3 +1,4 @@
+import { Row } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenuContent,
@@ -8,12 +9,11 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger
+  SheetTrigger,
 } from '@/components/ui/sheet';
-import { Row } from '@tanstack/react-table';
+import { DropdownTrigger, DropdownContainer, DropdownContainerProvider } from '@/components/wrapper/dropdown';
 import { ExpenseTypeForm } from '../form/expense-type-form';
 import { ExpenseTypeFormData } from '../form/schema';
-import { DropdownTrigger, DropdownContainer, DropdownContainerProvider } from '@/components/wrapper/dropdown';
 
 interface ActionCellProps {
   row: Row<ExpenseTypeFormData>;
@@ -24,7 +24,7 @@ export function ActionCell({ row }: ActionCellProps) {
   const defaultFormValues: Partial<ExpenseTypeFormData> = {
     name: rowData.name,
     category: rowData.category.toLowerCase(),
-    aggregateType: rowData.aggregateType.toLowerCase()
+    aggregateType: rowData.aggregateType.toLowerCase(),
   };
 
   return (

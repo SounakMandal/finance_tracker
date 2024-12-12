@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb';
 
 export interface ExpenseType {
-  category: "needs" | "wants",
-  aggregateType: "individual" | "aggregate",
+  category: 'needs' | 'wants',
+  aggregateType: 'individual' | 'aggregate',
 }
 
 export interface User {

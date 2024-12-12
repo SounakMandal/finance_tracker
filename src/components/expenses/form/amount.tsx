@@ -1,13 +1,13 @@
-import { AmountInputProps, TransactionFormData } from './schema';
-import { Input } from "@/components/ui/input";
+import { useFormContext, useFormState } from 'react-hook-form';
+import { Input } from '@/components/ui/input';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { useFormContext, useFormState } from 'react-hook-form';
+} from '@/components/ui/form';
+import { AmountInputProps, TransactionFormData } from './schema';
 
 function AmountInput({ field }: AmountInputProps) {
   return (
