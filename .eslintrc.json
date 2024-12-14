@@ -35,6 +35,7 @@
   "ignorePatterns": [
     "src/components/ui/**/*",
     "src/hooks/use-toast.ts",
+    "src/hooks/use-mobile.tsx",
     "src/lib/**/*"
   ]
 }
