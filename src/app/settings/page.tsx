@@ -18,7 +18,7 @@ export default function SettingsManagement() {
       })
   );
   return (
-    <div>
+    <>
       <ExpenseTypeForm
         defaultValues={ {} }
         trigger={
@@ -34,6 +34,6 @@ export default function SettingsManagement() {
         }
       />
       <ExpenseTypeTable data={ data ?? [] } />
-    </div>
+    </>
   );
 }
