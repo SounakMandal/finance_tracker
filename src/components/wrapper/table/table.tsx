@@ -26,12 +26,12 @@ interface DataTableProps<TData, TValue> {
 
 function renderTableHead<TData>(header: Header<TData, unknown>) {
   return (
-    <TableHead key={ header.id }>
+    <TableHead key={ header.id } className="bg-secondary">
       { header.isPlaceholder ?
         null :
         flexRender(
-            header.column.columnDef.header,
-            header.getContext()
+          header.column.columnDef.header,
+          header.getContext()
         ) }
     </TableHead>
   );

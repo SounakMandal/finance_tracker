@@ -1,8 +1,10 @@
-import { ColumnDef } from '@tanstack/react-table';
+import { type ColumnDef, type RowData } from '@tanstack/react-table';
 import { DataTableColumnHeader } from '@/components/wrapper/table';
 import { type Expense } from '@/interface/expense';
 import { ActionCell } from './action-cell';
 import { TagsCell } from './tags-cell';
+import { User } from '@/interface/user';
+import { convertToTitleCase } from '@/utils/case';
 
 export const columns: ColumnDef<Expense>[] = [
   // {
@@ -38,10 +40,16 @@ export const columns: ColumnDef<Expense>[] = [
         year: 'numeric',
       });
     },
+    filterFn: (row, _columnId, filterValue: [Date, Date]) => {
+      const date = new Date(row.getValue('date'));
+      return date >= filterValue[0] && date <= filterValue[1];
+    }
   },
   {
     accessorKey: 'type',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Expense Type" />,
+    cell: ({ row }) => convertToTitleCase(row.getValue('type')),
+    filterFn: 'equals'
   },
   {
     accessorKey: 'amount',
@@ -54,6 +62,7 @@ export const columns: ColumnDef<Expense>[] = [
       }).format(amount);
       return <div className="text-left font-medium">{ formatted }</div>;
     },
+    filterFn: 'inNumberRange',
   },
   {
     accessorKey: 'description',
@@ -63,6 +72,10 @@ export const columns: ColumnDef<Expense>[] = [
     accessorKey: 'tags',
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Attached tags" />,
     cell: ({ row }) => <TagsCell row={ row } />,
+    filterFn: (row, _columnId, filterValue) => {
+      const tags = row.getValue<User['tags']>('tags');
+      return tags.some(tag => tag.toLowerCase().includes(filterValue.toLowerCase()));
+    }
   },
   {
     id: 'actions',

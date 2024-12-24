@@ -9,10 +9,10 @@ import { useUserQuery } from '@/hooks/useUserQuery';
 import { convertToTitleCase } from '@/utils/case';
 
 export function ExpenseType() {
-  const { data } = useUserQuery((expenseTypes) => {
+  const { data } = useUserQuery((user) => {
     const needs: string[] = [];
     const wants: string[] = [];
-    Object.entries(expenseTypes).forEach(([category, type]) => {
+    Object.entries(user.expense_types).forEach(([category, type]) => {
       switch (type.category) {
         case 'needs':
           needs.push(category);

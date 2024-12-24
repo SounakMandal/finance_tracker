@@ -9,7 +9,8 @@ import { convertToTitleCase } from '@/utils/case';
 
 export default function SettingsManagement() {
   const { data } = useUserQuery(
-      (expenseTypes) => Object.entries(expenseTypes).map(([category, type]) => {
+    (user) => Object.entries(user.expense_types)
+      .map(([category, type]) => {
         return {
           name: convertToTitleCase(category),
           category: convertToTitleCase(type.category),

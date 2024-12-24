@@ -6,6 +6,7 @@ import {
   Notebook,
   ReceiptText,
   Settings,
+  View,
 } from 'lucide-react';
 import { AppSidebar } from '@/components/wrapper/sidebar/sidebar';
 import { Toaster } from '@/components/ui/toaster';
@@ -41,6 +42,11 @@ const items: SidebarItem[] = [
         title: 'Display',
         url: '/expenses/display',
         icon: ChartLine,
+      },
+      {
+        title: 'Views',
+        url: '/expenses/views',
+        icon: View,
       },
     ],
   },
@@ -81,7 +87,7 @@ export default function RootLayout({
                   <HeaderBreadcrumb items={ removeIcons(items) } />
                 </div>
               </header>
-              <div className='ml-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'>
+              <div className='mx-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'>
                 { children }
               </div>
             </SidebarInset>

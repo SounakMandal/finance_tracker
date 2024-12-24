@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 import {
   type ColumnDef,
+  type ColumnFiltersState,
   SortingState,
   type TableOptions,
+  type VisibilityState,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -18,10 +21,10 @@ interface TransactionsTableProps extends Partial<Omit<TableOptions<Expense>, 'da
   columns: ColumnDef<Expense>[];
 }
 
-export function TransactionsTable({ data, columns, ...rest }: TransactionsTableProps) {
+export const TransactionsTable = forwardRef<any, TransactionsTableProps>(({ data, columns, ...rest }, ref) => {
   const [sorting, setSorting] = useState<SortingState>([]);
-  // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  // const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   // const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
@@ -31,18 +34,22 @@ export function TransactionsTable({ data, columns, ...rest }: TransactionsTableP
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    // onColumnFiltersChange: setColumnFilters,
-    // getFilteredRowModel: getFilteredRowModel(),
-    // onColumnVisibilityChange: setColumnVisibility,
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     // onRowSelectionChange: setRowSelection,
     state: {
       sorting,
-      // columnFilters,
-      // columnVisibility,
+      columnFilters,
+      columnVisibility,
       // rowSelection
     },
     ...rest,
   });
+
+  useImperativeHandle(ref, () => ({
+    table,
+  }));
 
   return (
     <>
@@ -50,4 +57,4 @@ export function TransactionsTable({ data, columns, ...rest }: TransactionsTableP
       <DataTablePagination table={ table } />
     </>
   );
-}
+});

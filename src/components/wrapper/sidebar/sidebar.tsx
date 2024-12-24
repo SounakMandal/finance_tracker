@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/sidebar';
 import { Each } from '@/components/utils/map';
 import { SidebarItem } from '@/interface/navigation';
-import { SidebarGroupItem } from './sidebar-group';
+import { SidebarGroupItem } from './sidebar-group-item';
 
 interface SidebarProps {
   label: string;

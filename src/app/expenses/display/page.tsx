@@ -7,13 +7,13 @@ import { useUserQuery } from '@/hooks/useUserQuery';
 
 export default function ExpenseManagement() {
   const { data } = useUserQuery(
-      (expenseTypes) => Object.entries(expenseTypes)
-          .map(([category]) => {
-            return {
-              name: category,
-              total: Math.floor(Math.random() * 5000) + 1000,
-            };
-          })
+    (user) => Object.entries(user.expense_types)
+      .map(([category]) => {
+        return {
+          name: category,
+          total: Math.floor(Math.random() * 5000) + 1000,
+        };
+      })
   );
   return (
     <div className='flex flex-row w-full gap-4'>
