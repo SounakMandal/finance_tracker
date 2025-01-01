@@ -1,25 +1,26 @@
+import React from 'react';
 import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { type Table as TableType } from '@tanstack/table-core';
 import { Button } from '@/components/ui/button';
 import { ExpenseForm } from '@/components/expenses/form/expense-form';
 import { UploadDialog } from '@/components/expenses/upload/upload-dialog';
 import { DialogContainerProvider } from '@/components/wrapper/dialog/dialog-context';
+import { DataTableViewOptions } from '../../wrapper/table';
+import { TableFilters } from './table-filters';
 
-export function TableControl() {
+export function TableControl<TData>({ table }: { table: TableType<TData>; }) {
   return (
     <div className="flex items-center justify-between py-4">
-      {/* <Input
-          placeholder="Filter emails..."
-          value={ (table.getColumn("email")?.getFilterValue() as string) ?? "" }
-          onChange={ handleFilterChange }
-          className="max-w-sm"
-        /> */}
       <div className='flex gap-1'>
-        {/* <DataTableViewOptions table={ table } /> */ }
+        <TableFilters table={ table } />
+        <DataTableViewOptions table={ table } />
+      </div>
+      <div className='flex gap-1'>
         <ExpenseForm
           defaultValues={ {} }
           trigger={
@@ -41,6 +42,6 @@ export function TableControl() {
           <UploadDialog />
         </DialogContainerProvider>
       </div>
-    </div>
+    </div >
   );
 }

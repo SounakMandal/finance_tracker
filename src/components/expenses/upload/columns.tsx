@@ -49,10 +49,10 @@ export const columns: ColumnDef<Expense>[] = [
     header: ({ column }) => <DataTableColumnHeader column={ column } title="Transaction Date" />,
     cell: ({ row }) => {
       const initialValue = new Date(row.getValue('date'));
+      const [calendarOpen, setCalendarOpen] = useState(false);
       const [date, setDate] = useState<Date | undefined>(initialValue);
-      console.log(date);
       return (
-        <Popover>
+        <Popover open={ calendarOpen } onOpenChange={ setCalendarOpen }>
           <PopoverTrigger asChild>
             <Button variant={ 'outline' } className={ cn('pl-3 text-left font-normal', !date && 'text-muted-foreground') }>
               { date ?
@@ -67,7 +67,10 @@ export const columns: ColumnDef<Expense>[] = [
             <Calendar
               mode="single"
               selected={ date }
-              onSelect={ (date) => setDate(date) }
+              onSelect={ (date) => {
+                setDate(date);
+                setCalendarOpen(false);
+              } }
               disabled={ (date: Date) => date > new Date() || date < new Date('1900-01-01') }
             />
           </PopoverContent>

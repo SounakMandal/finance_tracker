@@ -8,13 +8,14 @@ export function FormClose() {
   const { closeButton } = useFormClose();
   return (
     <SheetFooter>
-      { isDirty &&
-        <SheetClose
-          asChild type='submit' onClick={ () => closeButton.current = 'save' }
-        >
-          <Button>Save changes</Button>
-        </SheetClose>
-      }
+      <SheetClose
+        asChild
+        type='submit'
+        onClick={ () => closeButton.current = 'save' }
+        disabled={ !isDirty }
+      >
+        <Button>Save changes</Button>
+      </SheetClose>
       <SheetClose asChild onClick={ () => closeButton.current = 'close' } >
         <Button>Close</Button>
       </SheetClose>

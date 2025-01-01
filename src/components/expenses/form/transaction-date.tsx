@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useFormContext, useFormState } from 'react-hook-form';
@@ -19,6 +20,7 @@ import { cn } from '@/lib/utils';
 import { TransactionDatePickerProps, TransactionFormData } from './schema';
 
 function TransactionDatePicker({ field }: TransactionDatePickerProps) {
+  const [calendarOpen, setCalendarOpen] = useState(false);
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -37,7 +39,10 @@ function TransactionDatePicker({ field }: TransactionDatePickerProps) {
         <Calendar
           mode="single"
           selected={ field.value }
-          onSelect={ field.onChange }
+          onSelect={ (date) => {
+            field.onChange(date);
+            setCalendarOpen(false);
+          } }
           disabled={ (date: Date) => date > new Date() || date < new Date('1900-01-01') }
         />
       </PopoverContent>
