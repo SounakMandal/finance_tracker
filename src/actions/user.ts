@@ -5,7 +5,7 @@ import { User } from '@/interface/user';
 import { database, user_id } from '../data/connect';
 import document from '../data/user_example.json';
 
-export async function getUser(): Promise<User> {
+export async function getUser() {
   try {
     const user = await database
       .collection('user')
@@ -21,11 +21,11 @@ export async function getUser(): Promise<User> {
 }
 
 export async function updateUserDetails(updateDetails: object) {
-  const result = await database
+  return await database
     .collection('user')
     .updateOne(
       { _id: new ObjectId(user_id) },
-      { $set: updateDetails }
+      { $set: updateDetails },
+      { upsert: true }
     );
-  if (result.modifiedCount === 0) throw Error('Invalid query');
 }

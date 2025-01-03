@@ -13,7 +13,7 @@ import { useFilterStore } from '../filters/store';
 import { type Table as TableType } from '@tanstack/table-core';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { useView } from '@/hooks/useView';
+import { useViewMutation } from '@/hooks/useViewMutation';
 
 export function TableFilters<TData>({ table }: { table: TableType<TData>; }) {
   const filters = useFilterStore((state) => state.filters);
@@ -21,7 +21,7 @@ export function TableFilters<TData>({ table }: { table: TableType<TData>; }) {
   const [open, setOpen] = useState(false);
   const [viewName, setViewName] = useState('');
   const [count, setCount] = useState(Object.keys(filters).length);
-  const { mutate } = useView();
+  const { mutate } = useViewMutation();
 
   const applyFilters = () => {
     table.getAllColumns().forEach(column => {
